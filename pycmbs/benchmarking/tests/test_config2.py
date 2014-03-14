@@ -7,6 +7,7 @@ COPYRIGHT.md
 
 import unittest
 import json
+import yaml
 from pycmbs.benchmarking import config2
 
 class TestPycmbsBenchmarkingConfig(unittest.TestCase):
@@ -17,13 +18,20 @@ class TestPycmbsBenchmarkingConfig(unittest.TestCase):
             "general": "None",
             "models": "None",
             "observations": "None",
-            "plots": "None"
+            "plots": {
+                "Hovmoeller": "True"}
         }
         """
     def test_parse_config_WorksWithJsonString(self):
-        ref_list = json.loads(self.test_cfg)
-        test_list = config2.parse_config(self.test_cfg, fmt='json')
-        self.assertDictContainsSubset(ref_list, test_list)
+        ref_dict = json.loads(self.test_cfg)
+        test_dict = config2.parse_config(self.test_cfg, fmt='json')
+        self.assertDictContainsSubset(ref_dict, test_dict)
+
+    def test_parse_config_WorksWithYamlString(self):
+        self.yaml_cfg = "models: " + "None"
+        ref_dict = yaml.load(self.yaml_cfg)
+        test_dict = config2.parse_config(self.yaml_cfg, fmt='yaml')
+        self.assertDictContainsSubset(ref_dict, test_dict)
 
 if __name__ == "__main__":
     unittest.main()
