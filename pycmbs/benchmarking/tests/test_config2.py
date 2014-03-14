@@ -5,9 +5,11 @@ For COPYING and LICENSE details, please refer to the file
 COPYRIGHT.md
 """
 
+import os
 import unittest
 import json
 import yaml
+import tempdir
 from pycmbs.benchmarking import config2
 
 class TestPycmbsBenchmarkingConfig(unittest.TestCase):
@@ -22,6 +24,7 @@ class TestPycmbsBenchmarkingConfig(unittest.TestCase):
                 "Hovmoeller": "True"}
         }
         """
+
     def test_parse_config_WorksWithJsonString(self):
         ref_dict = json.loads(self.test_cfg)
         test_dict = config2.parse_config(self.test_cfg, fmt='json')
@@ -32,6 +35,17 @@ class TestPycmbsBenchmarkingConfig(unittest.TestCase):
         ref_dict = yaml.load(self.yaml_cfg)
         test_dict = config2.parse_config(self.yaml_cfg, fmt='yaml')
         self.assertDictContainsSubset(ref_dict, test_dict)
+    
+    @unittest.skip('not passing')
+    def test_load_config_LoadFromFile(self):
+        with tempdir.TempDir() as tdir:
+            self.tempfile_path = os.path.join(tdir, 'testfile.cfg')
+            self.tempfile = open(self.tempfile_path, 'w')
+            print >> self.tempfile, self.test_cfg
+            self.tempfile.close()
+            expected_dict = json.loads(self.test_cfg)
+            actual_dict = config2.load_config(self.tempfile_path, fmt='json')
+            self.assertEqual(expected_dict, actual_dict)
 
 if __name__ == "__main__":
     unittest.main()
