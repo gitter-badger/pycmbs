@@ -9,20 +9,24 @@ class ConfigFile(object):
     """
     pass
 
-def load_config(filename):
+def load_config(filename, fmt=None):
     """
     Load benchmarking configuration from file
     """
-    pass
+    fh = open(filename, 'r')
+    file_contents = fh.read()
+    config_contents = parse_config(file_contents, fmt=fmt)
+    fh.close()
+    return config_contents
 
-def parse_config(config_string, fmt='json'):
+def parse_config(config_string, fmt=None):
     """
     Parse config from string
     Allow choice between config storage backends
     """
     if fmt is 'json':
         config_contents = parse_json_config(config_string)
-    elif fmt is 'yaml':
+    elif fmt is 'yaml' or None:
         config_contents = parse_yaml_config(config_string)
     else:
         raise ValueError("config format not recognized")
