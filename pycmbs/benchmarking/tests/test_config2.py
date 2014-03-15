@@ -36,7 +36,6 @@ class TestPycmbsBenchmarkingConfig(unittest.TestCase):
         test_dict = config2.parse_config(self.yaml_cfg, fmt='yaml')
         self.assertDictContainsSubset(ref_dict, test_dict)
     
-    @unittest.skip('not passing')
     def test_load_config_LoadFromFile(self):
         with tempdir.TempDir() as tdir:
             self.tempfile_path = os.path.join(tdir, 'testfile.cfg')
