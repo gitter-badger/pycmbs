@@ -38,12 +38,12 @@ class TestPycmbsBenchmarkingConfig(unittest.TestCase):
     
     def test_load_config_LoadFromFile(self):
         with tempdir.TempDir() as tdir:
-            self.tempfile_path = os.path.join(tdir, 'testfile.cfg')
-            self.tempfile = open(self.tempfile_path, 'w')
-            print >> self.tempfile, self.test_cfg
-            self.tempfile.close()
+            tempfile_path = os.path.join(tdir, 'testfile.cfg')
+            tempfile = open(tempfile_path, 'w')
+            print >> tempfile, self.test_cfg
+            tempfile.close()
             expected_dict = json.loads(self.test_cfg)
-            actual_dict = config2.load_config(self.tempfile_path, fmt='json')
+            actual_dict = config2.load_config(tempfile_path, fmt='json')
             self.assertEqual(expected_dict, actual_dict)
 
 if __name__ == "__main__":
