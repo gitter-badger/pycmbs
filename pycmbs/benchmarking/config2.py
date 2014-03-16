@@ -34,7 +34,7 @@ def parse_config(config_string, fmt=None):
 
 def parse_json_config(config_string):
     """
-    Parse JSON file
+    Parse JSON string
     """
     import json
     config_contents = json.loads(config_string)
