@@ -6,8 +6,8 @@ For COPYING and LICENSE details, please refer to the file
 COPYRIGHT.md
 """
 
-import matplotlib as mpl
-mpl.rcParams['backend'] = 'Agg'
+# import matplotlib as mpl
+# mpl.rcParams['backend'] = 'Agg'
 
 from pycmbs.data import Data
 import matplotlib.pyplot as plt
