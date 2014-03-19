@@ -37,7 +37,10 @@ def parse_json_config(config_string):
     Parse JSON string
     """
     import json
-    config_contents = json.loads(config_string)
+    if len(config_string) == 0:
+        config_contents = None
+    else:
+        config_contents = json.loads(config_string)
     return config_contents
     
 def parse_yaml_config(config_string):

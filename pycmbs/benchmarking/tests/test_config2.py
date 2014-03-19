@@ -45,6 +45,10 @@ class TestPycmbsBenchmarkingConfig(unittest.TestCase):
             expected_dict = json.loads(self.test_cfg)
             actual_dict = config2.load_config(tempfile_path, fmt='json')
             self.assertEqual(expected_dict, actual_dict)
+    
+    def test_ParseEmptyJsonConfig(self):
+        empty_string = ""
+        self.assertIsNone(config2.parse_config(empty_string, fmt='json'))
 
 if __name__ == "__main__":
     unittest.main()
