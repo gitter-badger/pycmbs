@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Benchmarking configuration &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" />
+    <link rel="next" title="Customizing pyCMBS benchmarking environment" href="benchmarking_customization.html" />
+    <link rel="prev" title="Model benchmarking" href="benchmarking.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="benchmarking_customization.html" title="Customizing pyCMBS benchmarking environment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="benchmarking.html" title="Model benchmarking"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Benchmarking configuration</a><ul>
+<li><a class="reference internal" href="#plot-configuration-details">Plot configuration details</a><ul>
+<li><a class="reference internal" href="#global-plot-options">Global plot options</a></li>
+<li><a class="reference internal" href="#observation-specific-plot-options">Observation specific plot options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="benchmarking.html"
+                        title="previous chapter">Model benchmarking</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="benchmarking_customization.html"
+                        title="next chapter">Customizing pyCMBS benchmarking environment</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/benchmarking_configuration.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="benchmarking-configuration">
+<h1>Benchmarking configuration<a class="headerlink" href="#benchmarking-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plot-configuration-details">
+<h2>Plot configuration details<a class="headerlink" href="#plot-configuration-details" title="Permalink to this headline">¶</a></h2>
+<p>For each variable, a configuration file with the extension <em>.ini</em> is used to specify. The INI files are expected to be located in a directory which is specified in the main configuration file (.cfg).
+The plot configuration file specifies for each variable</p>
+<blockquote>
+<div><ul class="simple">
+<li>which diagnostics should be applied to a certain variable</li>
+<li>how plots for a particular diagnostic should look like (e.g. colorbars,
+limits ...)</li>
+<li>which observational datasets should be used</li>
+</ul>
+</div></blockquote>
+<p>An INI file has two major parts:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Global plot options</li>
+<li>Observation specific plot options (for each used observational dataset)</li>
+</ol>
+</div></blockquote>
+<div class="section" id="global-plot-options">
+<h3>Global plot options<a class="headerlink" href="#global-plot-options" title="Permalink to this headline">¶</a></h3>
+<p>The global plot options have the following structure (example below):</p>
+<div class="highlight-python"><div class="highlight"><pre>[OPTIONS]
+map_difference =  True
+map_seasons    =  True
+map_season_difference = False
+reichler_plot  =  True
+gleckler_plot   =  True
+hovmoeller_plot   =  False
+regional_analysis = True
+global_mean    = True
+vmin           =  0.
+vmax           =  8.
+dmin           =  -1.
+dmax           =  1.
+units          =  $mm/day$
+label          =  Daily evaporation
+cticks         = [0.,2.,4.,6.,8.,10.]
+nclasses       = 8
+preprocess     = True
+interpolation  = conservative
+targetgrid     = t63grid
+projection     = robin
+region_file    = /home/m300028/shared/data/CMIP5/evap/evspsbl/merged/dummy_mask2.nc
+region_file_varname = regmask
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><em>map_difference</em> [True,False]</dt>
+<dd>use diagnostic to plot difference between models and observations</dd>
+<dt><em>map_seasons</em> [True,False]</dt>
+<dd>use diagnostic to plot climatological monthly mean or seasonal mean maps of models and observations</dd>
+<dt><em>map_season_difference</em> [True,False]</dt>
+<dd>same as map_seasons, but for difference between models and observations.</dd>
+<dt><em>reichler_plot</em> [True,False]</dt>
+<dd>Summarize error skill score for this variable at the end of the section for this variable.</dd>
+<dt><em>gleckler_plot</em> [True,False]</dt>
+<dd>Use this variable in the <em>Portraet Diagram</em> at the end of the report.</dd>
+<dt><em>hovmoeller_plot</em> [True,False]</dt>
+<dd>Generate a hovmoeller plot for the variable, for both observations and models.</dd>
+<dt><em>regional_analysis</em> [True,False]</dt>
+<dd>Perform regional analysis (statistics and correlation) of observations and models per variable.</dd>
+<dt><em>region_file</em></dt>
+<dd>Name of netCDF file which contains the rasterized region IDs (user needs to ensure that the same geometry as the target grid is provided)</dd>
+<dt><em>region_file_varname</em></dt>
+<dd>name of variable in <em>region_file</em>, which shall be read to identify regions; note that the data is interpreted as integer values.</dd>
+<dt><em>global_mean</em></dt>
+<dd>generate a global mean plot for this variable (see XXXX)</dd>
+<dt><em>vmin</em></dt>
+<dd>minimum plotting limit for data</dd>
+<dt><em>vmax</em></dt>
+<dd>maximum plotting limit for data</dd>
+<dt><em>dmin</em></dt>
+<dd>minimum plotting limit for difference plot</dd>
+<dt><em>dmax</em></dt>
+<dd>maximum plotting limit for difference plot</dd>
+<dt><em>units</em></dt>
+<dd>string to specify units of the variable. This is used for automatic labeling of plots. Note that all text can be used which can also be used for labelling in matplotlib. In particular the usage of $ is usefull to render text using latex (e.g. $frac{a}{b}$ will plot you the a/b in a nice way).</dd>
+<dt><em>label</em></dt>
+<dd>label text to be used for the variable</dd>
+<dt><em>cticks</em></dt>
+<dd>tick labels for colormap</dd>
+</dl>
+</div>
+<div class="section" id="observation-specific-plot-options">
+<h3>Observation specific plot options<a class="headerlink" href="#observation-specific-plot-options" title="Permalink to this headline">¶</a></h3>
+<p>Below the global options, one can include an arbitrary number of observations.</p>
+<p>Each observation is specified by a block of configuration parameters, like in the following example.:</p>
+<div class="highlight-python"><div class="highlight"><pre>[CLARASAL]
+obs_file =  #get_data_pool_directory() + &#39;data_sources/CMSAF/CLARA-SAL/DATA/SAL_all_t63.nc&#39;#
+obs_var  =  sal
+scale_data = 0.01
+gleckler_position = 2
+add_to_report = True
+valid_mask = land
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><em>[Observation_Identifier]</em> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>unique identified for the observation. Will be used e.g. in plots as labels</dd>
+<dt><em>obs_file</em> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>name of observation file. Here the user can either specify a full path name
+to a file or, like shown in the example above, execute a python command
+that is used to construct the filename. In the above example, the hash (#)
+is used to identify a python command. If the value of obs_file starts and
+ends with a hash, then the string in between is executed like you would
+execute a python command. Here, the routine get_data_pool_directory() is
+called, which returns a path name and then the remaining path to the
+observational data file is appended.</dd>
+<dt><em>obs_var</em> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>name of variable in observation file</dd>
+<dt><em>scale_data</em> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>scaling factor to be applied on data of the file. This is e.g. usefull if
+the netCDF file does not contain an own scale_factor attribute or if you
+want to apply simple conversions (e.g. from kg/m**2 s to mm/day for
+precipitation). The data is multiplied by the scaling factor.</dd>
+<dt><em>gleckler_position</em> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>[1,2,3,4] position of the observational dataset in the Portraet diagram. Up
+to four different datasets can be shown at once. The meaning if the numbers
+is as follows: 1=top, 2=bottom, 3=left, 4=right</dd>
+<dt><em>add_to_report</em> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>add this observation to the report [True,False]</dd>
+<dt><em>valid_mask</em> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>[land,ocean,global]; specifies if a mask shall be applied to the dataset
+and model. If &#8216;land&#8217;, then all ocean areas are masked if &#8216;ocean&#8217;, then all
+land areas are masked. For any other options, the whole globe is used.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="benchmarking_customization.html" title="Customizing pyCMBS benchmarking environment"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="benchmarking.html" title="Model benchmarking"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

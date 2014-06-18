@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Model benchmarking &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" />
+    <link rel="next" title="Benchmarking configuration" href="benchmarking_configuration.html" />
+    <link rel="prev" title="FAQ" href="faq.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="benchmarking_configuration.html" title="Benchmarking configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="FAQ"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Model benchmarking</a><ul>
+<li><a class="reference internal" href="#your-first-benchmarking">Your first benchmarking</a></li>
+<li><a class="reference internal" href="#benchmarking-components">Benchmarking components</a><ul>
+<li><a class="reference internal" href="#map-season">Map season</a></li>
+<li><a class="reference internal" href="#map-difference">Map difference</a></li>
+<li><a class="reference internal" href="#hovmoeller-plot">Hovmoeller plot</a></li>
+<li><a class="reference internal" href="#pattern-correlation">Pattern correlation</a></li>
+<li><a class="reference internal" href="#portraet-diagram">Portraet diagram</a></li>
+<li><a class="reference internal" href="#global-mean-plot">Global Mean Plot</a></li>
+<li><a class="reference internal" href="#coming-next">Coming next</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="faq.html"
+                        title="previous chapter">FAQ</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="benchmarking_configuration.html"
+                        title="next chapter">Benchmarking configuration</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/benchmarking.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-benchmarking">
+<h1>Model benchmarking<a class="headerlink" href="#model-benchmarking" title="Permalink to this headline">¶</a></h1>
+<p>pyCMBS provides a flexible tool to compare output from models with other models as well as with observational data.</p>
+<div class="section" id="your-first-benchmarking">
+<h2>Your first benchmarking<a class="headerlink" href="#your-first-benchmarking" title="Permalink to this headline">¶</a></h2>
+<p>The main input for model benchmarking is model data and observational datasets as well as a user specified configuration. After running the benchmarking, you get a report (PDF format) as well as a lot of figures and statistics which contain usefull information. The benchmarking is based ona  modular approach and allows the user to customize the results by activating and deactivating specific components.</p>
+<p>The next steps will guide you through a benchmarking session to get you started.</p>
+<ol class="arabic">
+<li><p class="first">set up a working directory and change to it:</p>
+<div class="highlight-python"><div class="highlight"><pre># set up a working directory somewhere on your machine
+mkdir -p ~/temp/my_first_benchmarking
+cd ~/temp/my_first_benchmarking
+</pre></div>
+</div>
+</li>
+<li><p class="first">set up an initial configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre># simply run the pycmbs-benchmarking.py script
+# if properly installed, you should be able to just run it from the console
+pycmbs-benchmarking.py init
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This gives you:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ ls
+configuration  template.cfg
+</pre></div>
+</div>
+<p>If you do this for the first time,  then it is recommended that you make
+yourself familiar with the content of the <em>configuration</em> directory. This contains</p>
+<ul class="simple">
+<li>INI files for each variable which specify the plot and processing configuration</li>
+<li>.json files which specify interface routines for data conversion</li>
+</ul>
+<ol class="arabic" start="3">
+<li><p class="first">adapt the configuration file (xxx.cfg) to your needs. The configuration file is the center part where you specify</p>
+<ol class="loweralpha simple">
+<li>which variables shall be diagnosed</li>
+<li>which models shall be analysed</li>
+</ol>
+<p>Details about the configuration file are specified below.</p>
+</li>
+<li><p class="first">Do it!
+Run the benchmarking now by executing:</p>
+<div class="highlight-python"><div class="highlight"><pre>pycmbs.py your_config_script.cfg
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="benchmarking-components">
+<h2>Benchmarking components<a class="headerlink" href="#benchmarking-components" title="Permalink to this headline">¶</a></h2>
+<p>The benchmarking part of pyCMBS is based on a modular system of diagnostics.
+Currently the focus is on the comparison of climate mean states between
+observations and models. Below are examples of the currently implemented
+components which the user can combine to generate a specific report for a
+certain variable.</p>
+<div class="section" id="map-season">
+<h3>Map season<a class="headerlink" href="#map-season" title="Permalink to this headline">¶</a></h3>
+<p>Creates a figure with seasonal or monthly climatological means of the
+investigated variables.</p>
+<p>(<a class="reference external" href="./figures/fig_map_season.py">Source code</a>)</p>
+</div>
+<div class="section" id="map-difference">
+<h3>Map difference<a class="headerlink" href="#map-difference" title="Permalink to this headline">¶</a></h3>
+<p>Create a plot of temporal mean fields of observations and models and their
+absolute and relative differences.</p>
+<p>(<a class="reference external" href="./figures/fig_map_difference.py">Source code</a>)</p>
+</div>
+<div class="section" id="hovmoeller-plot">
+<h3>Hovmoeller plot<a class="headerlink" href="#hovmoeller-plot" title="Permalink to this headline">¶</a></h3>
+<p>Generates a standard Hovmoeller plot (= time-latitude plot) of the variable.</p>
+<p>(<a class="reference external" href="./figures/fig_hovmoeller.py">Source code</a>)</p>
+</div>
+<div class="section" id="pattern-correlation">
+<h3>Pattern correlation<a class="headerlink" href="#pattern-correlation" title="Permalink to this headline">¶</a></h3>
+<p>The correlation between the spatial patterns of investigated variables between
+models and observations can be vizualized in differnt ways. For each month or
+season the spatial correlation coefficient is estimated and vizualized as a
+timeline.</p>
+<p>(<a class="reference external" href="./figures/fig_pattern_correlation.py">Source code</a>)</p>
+</div>
+<div class="section" id="portraet-diagram">
+<h3>Portraet diagram<a class="headerlink" href="#portraet-diagram" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Portraet diagram</em> was proposed by <a class="reference external" href="http://www.agu.org/pubs/crossref/2008/2007JD008972.shtml">Gleckler et al. (2008)</a>. It is an
+efficient way to vizualize the relative rank of different models  for
+comparisons against different observations. While the original Portraet diagram
+supports only two different observations, pyCMBS supports up to four different
+datasets for each variable.</p>
+<p>(<a class="reference external" href="./figures/fig_portraet.py">Source code</a>, <a class="reference external" href="./figures/fig_portraet.png">png</a>, <a class="reference external" href="./figures/fig_portraet.hires.png">hires.png</a>, <a class="reference external" href="./figures/fig_portraet.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/fig_portraet.png" src="_images/fig_portraet.png" />
+</div>
+</div>
+<div class="section" id="global-mean-plot">
+<h3>Global Mean Plot<a class="headerlink" href="#global-mean-plot" title="Permalink to this headline">¶</a></h3>
+<p>Global mean timeseries of a specific variable. The global mean values are
+estimated using proper area weighting. The plot object also allows to
+automatically plot climatology mean values.</p>
+<p>(<a class="reference external" href="./figures/fig_globalmean.py">Source code</a>)</p>
+</div>
+<div class="section" id="coming-next">
+<h3>Coming next<a class="headerlink" href="#coming-next" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Regional analysis</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="benchmarking_configuration.html" title="Benchmarking configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="FAQ"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

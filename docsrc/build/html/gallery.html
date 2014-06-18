@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyCMBS gallery &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="FAQ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyCMBS gallery</a><ul>
+<li><a class="reference internal" href="#basic-plotting">Basic plotting</a></li>
+<li><a class="reference internal" href="#basic-data-analysis">Basic data analysis</a><ul>
+<li><a class="reference internal" href="#temporal-mean">Temporal mean</a></li>
+<li><a class="reference internal" href="#spatial-mean">Spatial mean</a></li>
+<li><a class="reference internal" href="#masking-an-area">Masking an area</a></li>
+<li><a class="reference internal" href="#temporal-slicing">Temporal slicing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-multiple-datasets">Working with multiple datasets</a><ul>
+<li><a class="reference internal" href="#simple-arithmetic-operations">Simple arithmetic operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#more-complex-data-analysis">More complex data analysis</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting_started.html"
+                        title="previous chapter">Getting started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="faq.html"
+                        title="next chapter">FAQ</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/gallery.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pycmbs-gallery">
+<h1>pyCMBS gallery<a class="headerlink" href="#pycmbs-gallery" title="Permalink to this headline">¶</a></h1>
+<p>In the following, examples will be given that introduce different features of pyCMBS.</p>
+<div class="section" id="basic-plotting">
+<h2>Basic plotting<a class="headerlink" href="#basic-plotting" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This file is part of pyCMBS. (c) 2012-2014</span>
+<span class="sd">For COPYING and LICENSE details, please refer to the file</span>
+<span class="sd">COPYRIGHT.md</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Basic plotting in pyCMBS</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pycmbs.mapping</span> <span class="kn">import</span> <span class="n">map_plot</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pycmbs.examples</span> <span class="kn">import</span> <span class="n">download</span>
+
+<span class="c"># Read some sample data ...</span>
+<span class="n">air</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_sample_file</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;air&#39;</span><span class="p">)</span>
+<span class="n">air</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">&#39;air temperature&#39;</span>
+
+<span class="c"># a quick plot as well as a projection plot</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">)</span>  <span class="c"># unprojected</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c"># projected</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting.py">Source code</a>)</p>
+<div class="figure">
+<img alt="_images/01_basic_plotting_00.png" src="_images/01_basic_plotting_00.png" />
+<p class="caption">(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_00.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_00.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_00.pdf">pdf</a>)</p>
+</div>
+<div class="figure">
+<img alt="_images/01_basic_plotting_01.png" src="_images/01_basic_plotting_01.png" />
+<p class="caption">(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_01.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_01.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_01.pdf">pdf</a>)</p>
+</div>
+<p>For plotting you have a rich suite of keyword parameters. Please use the
+python help() system to get full documentation from docstrings. Some
+more illustrations of options are provided:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span><span class="n">show_timeseries</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;show_timeseries=True&#39;</span><span class="p">)</span>
+<span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span><span class="n">show_zonal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;show_zonal=True&#39;</span><span class="p">)</span>
+<span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span><span class="n">show_histogram</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;show_histogram=True&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A.py">Source code</a>)</p>
+<div class="figure">
+<img alt="_images/01_basic_plotting_A_00.png" src="_images/01_basic_plotting_A_00.png" />
+<p class="caption">(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_00.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_00.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_00.pdf">pdf</a>)</p>
+</div>
+<div class="figure">
+<img alt="_images/01_basic_plotting_A_01.png" src="_images/01_basic_plotting_A_01.png" />
+<p class="caption">(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_01.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_01.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_01.pdf">pdf</a>)</p>
+</div>
+<div class="figure">
+<img alt="_images/01_basic_plotting_A_02.png" src="_images/01_basic_plotting_A_02.png" />
+<p class="caption">(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_02.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_02.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_A_02.pdf">pdf</a>)</p>
+</div>
+<p>And a few more details on customizing your map ...:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;vmin=-30.,vmax=30.,cmap_data=RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">30.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">30.</span><span class="p">,</span> <span class="n">cmap_data</span><span class="o">=</span><span class="s">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">contours</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">50.</span><span class="p">,</span><span class="mf">50.</span><span class="p">,</span><span class="mf">10.</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;contours=True&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">show_stat</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;show_stat=True&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+<span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">show_stat</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stat_type</span><span class="o">=</span><span class="s">&#39;median&#39;</span><span class="p">,</span> <span class="n">use_basemap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;show_stat=True,stat_type=&quot;median&quot;&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_B.py">Source code</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_B.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_B.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/01_basic_plotting_B.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/01_basic_plotting_B.png" src="_images/01_basic_plotting_B.png" />
+</div>
+</div>
+<div class="section" id="basic-data-analysis">
+<h2>Basic data analysis<a class="headerlink" href="#basic-data-analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="temporal-mean">
+<h3>Temporal mean<a class="headerlink" href="#temporal-mean" title="Permalink to this headline">¶</a></h3>
+<p>TBD</p>
+</div>
+<div class="section" id="spatial-mean">
+<h3>Spatial mean<a class="headerlink" href="#spatial-mean" title="Permalink to this headline">¶</a></h3>
+<p>TBD</p>
+</div>
+<div class="section" id="masking-an-area">
+<h3>Masking an area<a class="headerlink" href="#masking-an-area" title="Permalink to this headline">¶</a></h3>
+<p>TBD</p>
+</div>
+<div class="section" id="temporal-slicing">
+<h3>Temporal slicing<a class="headerlink" href="#temporal-slicing" title="Permalink to this headline">¶</a></h3>
+<p>TBD</p>
+</div>
+</div>
+<div class="section" id="working-with-multiple-datasets">
+<h2>Working with multiple datasets<a class="headerlink" href="#working-with-multiple-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simple-arithmetic-operations">
+<h3>Simple arithmetic operations<a class="headerlink" href="#simple-arithmetic-operations" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This file is part of pyCMBS. (c) 2012-2014</span>
+<span class="sd">For COPYING and LICENSE details, please refer to the file</span>
+<span class="sd">COPYRIGHT.md</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">working with the data object</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">pycmbs.examples</span> <span class="kn">import</span> <span class="n">download</span>
+<span class="kn">from</span> <span class="nn">pycmbs.mapping</span> <span class="kn">import</span> <span class="n">map_plot</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">)</span>
+
+<span class="n">air</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_sample_file</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;air&#39;</span><span class="p">)</span>
+<span class="n">air</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">&#39;air temperature&#39;</span>
+
+<span class="c"># generate some artificial data by rescaling the original data</span>
+<span class="n">air2</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c"># copy data object</span>
+<span class="n">air2</span><span class="o">.</span><span class="n">mulc</span><span class="p">(</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>  <span class="c"># copy=False applies operation directly on data, otherwise a copy is returned</span>
+
+<span class="c"># difference</span>
+<span class="k">print</span> <span class="s">&#39;Calculate differences ...&#39;</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">air2</span><span class="p">)</span>  <span class="c"># calculate difference</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">map_plot</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="n">cmap_data</span> <span class="o">=</span> <span class="s">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">10.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+
+<span class="c"># temporal evolution of mean and stdv</span>
+<span class="k">print</span> <span class="s">&#39;Temporal evolution of mean and stdv of a field; note that values are calculated as area weigted values&#39;</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">air</span><span class="o">.</span><span class="n">fldmean</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;fldmean()&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">air</span><span class="o">.</span><span class="n">fldstd</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;fldstd()&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="./../../pycmbs/examples/03_data_analysis.py">Source code</a>)</p>
+</div>
+</div>
+<div class="section" id="more-complex-data-analysis">
+<h2>More complex data analysis<a class="headerlink" href="#more-complex-data-analysis" title="Permalink to this headline">¶</a></h2>
+<p>TBD EOF (still needs implementation of logplot option in map_plot)</p>
+<p>##.. plot:: ../../pycmbs/examples/04_EOF_analysis.py
+##   :include-source:</p>
+<p>TBD SVD</p>
+<p>TBD slice correlation</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="FAQ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting started"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

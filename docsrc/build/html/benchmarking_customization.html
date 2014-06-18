@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Customizing pyCMBS benchmarking environment &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Benchmarking configuration" href="benchmarking_configuration.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="references.html" title="References"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="benchmarking_configuration.html" title="Benchmarking configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Customizing pyCMBS benchmarking environment</a><ul>
+<li><a class="reference internal" href="#how-to-add-new-variables-for-an-already-existing-model-output-format">How to add new variables for an already existing model output format?</a></li>
+<li><a class="reference internal" href="#how-to-add-new-observational-datasets">How to add new observational datasets?</a><ul>
+<li><a class="reference internal" href="#recepies-for-handling-problems">Recepies for handling problems</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-integrate-new-variables-in-the-analysis">How to integrate new variables in the analysis?</a></li>
+<li><a class="reference internal" href="#how-to-add-a-new-model-format">How to add a new model format?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="benchmarking_configuration.html"
+                        title="previous chapter">Benchmarking configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="references.html"
+                        title="next chapter">References</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/benchmarking_customization.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="customizing-pycmbs-benchmarking-environment">
+<h1>Customizing pyCMBS benchmarking environment<a class="headerlink" href="#customizing-pycmbs-benchmarking-environment" title="Permalink to this headline">¶</a></h1>
+<p>The model benchmarking framework can be easily customized and adapted to the user needs.
+In the following, we will cover the following topics:</p>
+<ul class="simple">
+<li>How to add new variables for an already existing model output format?</li>
+<li>How to add new observational datasets?</li>
+<li>How to integrate new variables in the analysis?</li>
+<li>How to use already existing external scripts together with the pyCMBS environment?</li>
+<li>How to add a new model format?</li>
+</ul>
+<div class="section" id="how-to-add-new-variables-for-an-already-existing-model-output-format">
+<h2>How to add new variables for an already existing model output format?<a class="headerlink" href="#how-to-add-new-variables-for-an-already-existing-model-output-format" title="Permalink to this headline">¶</a></h2>
+<p>A particular model output format is represented in pyCMBS by its own class. For
+an already existing model class, one needs to implement a reader for each
+variable. In principle, this is just a small subroutine that has the logic
+implemented how to properly read the data. Typically this requires:</p>
+<ul class="simple">
+<li>generation of filename dependent on e.g. experiment ID</li>
+<li>reading data into a Data object</li>
+</ul>
+<p>To implement a new variable reader, there are several ways. You can either
+implement one routine per variable or make use of generic I/O routines (see
+routine get_model_data_generic in modely.py)</p>
+</div>
+<div class="section" id="how-to-add-new-observational-datasets">
+<h2>How to add new observational datasets?<a class="headerlink" href="#how-to-add-new-observational-datasets" title="Permalink to this headline">¶</a></h2>
+<p>The integration of new observational datasets is very simple as long as the datasets you use follow some standard conventions:</p>
+<ul class="simple">
+<li>datasets are in netCDF format</li>
+<li>optional: datasets have metadata attributes in the netCDF file. pyCMBS is making automatically use of CF conventions like netCDF attributes like <em>scale_factor</em>, <em>add_offset</em>, <em>_FillValue</em>, <em>units</em>. In case these attributes are provided, they are automatically used</li>
+<li>lat/lon coordinates are provided either as vectors (for simple lat/lon projections) or as 2D fields (a (lat, lon) tuple for each grid cell).</li>
+<li>observations are stored in a single file (all timesteps included)</li>
+</ul>
+<p>Steps to integrate a new observational dataset into pyCMBS are as follows:</p>
+<ul class="simple">
+<li>decide for the variable the observational dataset belongs to &#8211;&gt; variable name; you can look in the configuration file (.cfg) to get the currently supported variable names</li>
+<li>modify the corresponding INI file</li>
+</ul>
+<blockquote>
+<div><ul>
+<li><p class="first">let&#8217;s say, that you have chosen <em>sis</em> (surface solar irradiance) as the variable and you have a new surface radiation dataset. Then the corresponding INI file would be <em>sis.ini</em>. The INI files can be found in the <em>configuration</em> folder.</p>
+</li>
+<li><p class="first">You can however also generate an own, new configuration folder, by simply typing <em>pycmbs.py init</em> in a fresh directory</p>
+</li>
+<li><p class="first">The content of the INI file is self explanatory. You have a global section which specifies how the analysis for this particular variable shall be made (e.g. which diagnostics and plots shall be generated). Below, you have for each observational dataset a section which specifies the details for each observation. Such a section looks e.g. like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>[CERES]
+obs_file = #get_data_pool_directory() + &#39;data_sources/CERES/EBAF/ED_26r_SFC/DATA/CERES_EBAF-Surface__Ed2.6r__sfc_sw_down_all_mon__1x1__200003-201002.nc&#39;#
+obs_var  = sfc_sw_down_all_mon
+scale_data = 1.
+gleckler_position = 2
+add_to_report = True
+valid_mask = global
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>The different entries have the following meaning</p>
+<dl class="docutils">
+<dt>[id] <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>id of observational dataset. Will be used e.g also as labels for plots</dd>
+<dt>obs_file <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>path to the netCDF file with the observations
+here you can either specify an <em>absolute</em> path or you can out a python code snipped between two hashes &#8216;#&#8217;. The latter approach is usefull, when you have some function that directs to a particular directory, like in the example given. Otherwise, the easiest way is to just put the <em>absolute path</em> to the netCDF file.</dd>
+<dt>obs_var <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>specifies the name of the variable in the netCDF file</dd>
+<dt>scale_data <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>a multiplicative scaling factor that is applied to the data when it is read</dd>
+<dt>gleckler_position <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>[1...4]; This number specifies, where the observational dataset will be placed in the portraet diagram (???)</dd>
+<dt>add_to_report <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>[True,False], specifies if the observational dataset should be included in the report or not. This allows to have a lot of configurations in the INI file, but use only a few of them.</dd>
+<dt>valid_mask <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>[land,ocean,global], specifies which area(s) are supposed to contain valid data. Other regions are automatically masked. Thus if you specify e.g. <em>land</em>, then the ocean will be masked. It is important, that you use a</dd>
+</dl>
+<p>Adding a new observation is as simple as copy/paste an already existing section and modify the entries like you need it. That&#8217;s it ... well at least on a technicla point. If everything is working properly and if the diagnostics you want to apply for this observational dataset are usefull is a different question.</p>
+<div class="section" id="recepies-for-handling-problems">
+<h3>Recepies for handling problems<a class="headerlink" href="#recepies-for-handling-problems" title="Permalink to this headline">¶</a></h3>
+<p>In 80% of the cases, pyCMBS will handle your new data smoothly. However, it might happen that your file(s) are different from the files pyCMBS was tested so far with. For these cases the following steps might help to solve your problem:</p>
+<p>Is the file o.k?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Have a look at the file with other tools like e.g. ncview or panoply</li>
+<li>make also an &#8220;ncdump -h&#8221; to check the metadata of the file</li>
+</ul>
+</div></blockquote>
+<p>Can <em>cdo&#8217;s</em> work with the file?</p>
+<p>The preprocessing capabilities of pyCMBS largely rely on the usage of the climate data operators (cdo). If the <em>cdo&#8217;s</em> can not work with your file, then pyCMBS will most likely have also problems.</p>
+<blockquote>
+<div><ul class="simple">
+<li>check if <em>cdo&#8217;s</em> can in general read the file: <em>cdo sinfo &lt;filename&gt;</em></li>
+<li>check if grid of the file is recognized by trying to remap the file manually using <em>cdo remapcon,t63grid &lt;infile&gt; nothing.nc</em></li>
+</ul>
+</div></blockquote>
+<p>If one of the two tests above fail, then your file is missing some essential metadata or has a strange grid or grid description that is not automatically recognized.
+In these cases, it would be best, if you try to figure out, why the <em>cdo&#8217;s</em> are not capable to work with your dataset.
+Try to pose your question to the <a class="reference external" href="https://code.zmaw.de/projects/cdo/boards">cdo&#8217;s help forum</a> (don&#8217;t forget to provide details about your file; e.g. by sending the results of <em>ncdump -h</em>)</p>
+</div>
+</div>
+<div class="section" id="how-to-integrate-new-variables-in-the-analysis">
+<h2>How to integrate new variables in the analysis?<a class="headerlink" href="#how-to-integrate-new-variables-in-the-analysis" title="Permalink to this headline">¶</a></h2>
+<p>To add new variables in pyCMBS implies the following steps:</p>
+<p>1. <strong>Define I/O routine:</strong> Implement for each model class that shall support the new variable a routine
+that allows to read the data. Let&#8217;s say you have a variable <em>sis</em>, then you
+would need e.g. to implement a routine <em>get_sis()</em> for the CMIP5 model class.
+Note that there is already a routine which can be used for generic I/O.</p>
+<p>2. <strong>Register I/O routine</strong>: After you have implemented the routine to read the
+data, you need to let the program know about it. All data is read using a
+routine called <em>get_data()</em>. This routine gets the information which
+subroutines to call from details provided in a configuration file. The
+configuration file is found in:</p>
+<div class="highlight-python"><div class="highlight"><pre>./configuration/model_data_routines.json
+</pre></div>
+</div>
+<p>The file is a simple JSON dictionary. Make yourself a bit familar with the
+structure and it should not be a problem to implement your new routine there.</p>
+<p>3. <strong>Analysis script:</strong> Now you have the analysis script that can be used to
+read the data. However, you still need to tell pyCMBS how to make use of this
+new information. This you do by implementing an analysis routine in
+<em>analysis.py</em>. For most variables supported so far, this analysis routine is
+just a wrapper which is calling a very generic analysis routine that basically
+does everything you tell it to do. What to do is specified in the INI files for
+each variable. Note however, that you are free to do what you want and you can
+implement a new analysis routine which is doing right the thing you want it to
+do.</p>
+<p>4. <strong>Last step</strong> is to tell pyCMBS that the analysis script you implemented is
+existing. This is again done, by simply registering it in the following file:</p>
+<div class="highlight-python"><div class="highlight"><pre>./configuration/analysis_scripts.json
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-add-a-new-model-format">
+<h2>How to add a new model format?<a class="headerlink" href="#how-to-add-a-new-model-format" title="Permalink to this headline">¶</a></h2>
+<p>Each model is represented by its own class which is herited from the <em>Model</em>
+class. Each model object/class needs to support reading of the variables that
+should be used for the analysis. Please look at the current code in <em>models.py</em>
+to see how the actual implementation can look like. Important is a coherent
+support of the routines which are importing data from files for a model
+specific file format.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="references.html" title="References"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="benchmarking_configuration.html" title="Benchmarking configuration"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
