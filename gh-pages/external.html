@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>External program usage &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/external.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="external-program-usage">
+<h1>External program usage<a class="headerlink" href="#external-program-usage" title="Permalink to this headline">¶</a></h1>
+<p>Requirements for external program</p>
+<p>pyCMBS provides an easy interface to enable to run any kind of data analysis script. The following minimal requirements need to be fulfilled by the analysis script:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Programming language: there are no restriction to a programming language. The only requirement is, that the script is stored in an ASCII file.</dt>
+<dd><dl class="first last docutils">
+<dt>Shell: pyCMBS will envoke a shell in which the programm will run. Your analysis programm needs to be able therefore to run on a shell. Some examples are</dt>
+<dd><dl class="first last docutils">
+<dt>Matlab: matlab -nosplash -nodesktop -r &lt;SCRIPTNAME&gt;</dt>
+<dd><dl class="first last docutils">
+<dt>External python programm: xxxxxxxxxxxxxxxxxxx</dt>
+<dd><dl class="first last docutils">
+<dt>NCL: xxxxxxxxxxxxxxxxxxxxxxxxx</dt>
+<dd><dl class="first last docutils">
+<dt>shell script: no additional information needed</dt>
+<dd><dl class="first last docutils">
+<dt>Output directory: The output script needs to write all output to a directory. This directory is supposed to be specified in the programm by a variable.</dt>
+<dd><dl class="first last docutils">
+<dt>The output script is expected to check if its output directory is already existing. If this is not the case, it is expected to generate the output directory by its own. pyCMBS will not know the output directory and can therefore not check for it!</dt>
+<dd><dl class="first last docutils">
+<dt>Graphical output: it is recommended that all graphical output is written to graphic files. Graphical output will in general work also with pyCMBS, but the programm is likely to perform faster and also more robust if every graphical output is written to file.</dt>
+<dd>Success report: pyCMBS needs to know, if the programm has terminated correctly. The exitcode of the shell will be checked for that purpose. If this is zero, then pyCMBS assumes that everything went fine. However, if the programm has no appropriate error handling, then the return code might be zero even if the programm did not terminate successfully. pyCMBS supports therefore a second way to document successfully programm execution. After completion of the programm, pyCMBS will check for a file with the name &lt;SCRIPTNAME&gt;.log. This file is expected to be a simple ASCII file with a single line. In case of successfull programm completion, the file needs to contain the string &#8220;TRUE&#8221;. Any other entry will be considered as a not successful completion of the programme. It is suggested that your script creates the log file in the beginning of its exectution with a value FALSE, and then overwrites this value with TRUE in the very last line of the code.</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p>xxx:</p>
+<div class="highlight-python"><div class="highlight"><pre>program test
+implicit none
+integer F,i
+
+open(10,file=&#39;test.x.log&#39;);
+write(10,*) &#39;FALSE&#39;; close(10)
+
+do i=1,100
+    print*, &#39;Doing some numbercrunching&#39;
+end do
+
+!finished successfully here
+open(10,file=&#39;test.x.log&#39;)
+write(10,*) &#39;TRUE&#39;; close(10)
+
+end program
+</pre></div>
+</div>
+<p>blabla</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

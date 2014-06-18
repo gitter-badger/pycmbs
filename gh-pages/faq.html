@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FAQ &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" />
+    <link rel="next" title="Model benchmarking" href="benchmarking.html" />
+    <link rel="prev" title="pyCMBS gallery" href="gallery.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="benchmarking.html" title="Model benchmarking"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gallery.html" title="pyCMBS gallery"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FAQ</a><ul>
+<li><a class="reference internal" href="#how-to-mask-a-specific-area-in-a-whole-datafile">How to mask a specific area in a whole datafile?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gallery.html"
+                        title="previous chapter">pyCMBS gallery</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="benchmarking.html"
+                        title="next chapter">Model benchmarking</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/faq.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-mask-a-specific-area-in-a-whole-datafile">
+<h2>How to mask a specific area in a whole datafile?<a class="headerlink" href="#how-to-mask-a-specific-area-in-a-whole-datafile" title="Permalink to this headline">¶</a></h2>
+<p>Let us assume that you have a mask which specifies some region in your data.
+You now want to apply a mask to that region and probably even only extract the
+region you are interested in. This implies two steps:</p>
+<ol class="loweralpha simple">
+<li>apply the mask to the data</li>
+<li>cut the data using its bounding box.</li>
+</ol>
+<p>Doing so is straight forward in pyCMBS as the following examples illustrates.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This file is part of pyCMBS. (c) 2012-2014</span>
+<span class="sd">For COPYING and LICENSE details, please refer to the file</span>
+<span class="sd">COPYRIGHT.md</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pycmbs.examples</span> <span class="kn">import</span> <span class="n">download</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pycmbs.mapping</span> <span class="kn">import</span> <span class="n">map_plot</span>
+<span class="kn">from</span> <span class="nn">pycmbs.data</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">)</span>
+
+<span class="c"># read some data as Data object</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_sample_file</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;air&#39;</span><span class="p">,</span> <span class="n">return_object</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">air</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;air&#39;</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># generate some mask that fits geometry of data. Could be also read from some</span>
+<span class="c"># file. We mimic here some irregular mask</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">air</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">:</span><span class="mi">120</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">&#39;bool&#39;</span><span class="p">)</span>  <span class="c"># make a bool array</span>
+
+
+
+
+<span class="c"># generate figure for illustration purposes</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">f1</span> <span class="o">=</span> <span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;This is the original data (unprojected)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&#39;This is the mask&#39;</span><span class="p">)</span>
+
+<span class="c"># now we apply the mask to the Data object</span>
+<span class="n">air</span><span class="o">.</span><span class="n">_apply_mask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>  <span class="c"># applies a mask to each timestep</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;Masked data&#39;</span><span class="p">)</span>
+
+<span class="c"># if you want you can estimate automatically the bounding box</span>
+<span class="n">air</span><span class="o">.</span><span class="n">cut_bounding_box</span><span class="p">()</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="n">map_plot</span><span class="p">(</span><span class="n">air</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;Cutted data&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="./../../pycmbs/examples/howto_mask_region.py">Source code</a>, <a class="reference external" href="./../../pycmbs/examples/howto_mask_region.png">png</a>, <a class="reference external" href="./../../pycmbs/examples/howto_mask_region.hires.png">hires.png</a>, <a class="reference external" href="./../../pycmbs/examples/howto_mask_region.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/howto_mask_region.png" src="_images/howto_mask_region.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="benchmarking.html" title="Model benchmarking"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gallery.html" title="pyCMBS gallery"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

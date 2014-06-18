@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" />
+    <link rel="next" title="Getting started" href="getting_started.html" />
+    <link rel="prev" title="General concept" href="concept.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting started"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="concept.html" title="General concept"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#operating-systems">Operating systems</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#installation-of-dependencies">Installation of dependencies</a></li>
+<li><a class="reference internal" href="#quick-installation-from-scratch-for-experts">Quick installation from scratch for experts</a></li>
+<li><a class="reference internal" href="#detailed-installation-instructions-for-pycmbs">Detailed installation instructions for pyCMBS</a><ul>
+<li><a class="reference internal" href="#installation-using-pip-the-easiest-way">Installation using <em>pip</em> (the easiest way)</a></li>
+<li><a class="reference internal" href="#installation-of-stable-version-from-a-tarball">Installation of stable version from a <em>tarball</em></a></li>
+<li><a class="reference internal" href="#github-repository-for-developers">github repository (for developers)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-dependencies">Installation of dependencies</a></li>
+<li><a class="reference internal" href="#final-check-of-installation">Final check of installation</a></li>
+<li><a class="reference internal" href="#further-information-and-trouble-solving">Further information and trouble solving</a><ul>
+<li><a class="reference internal" href="#some-hints-for-trouble-solving">Some hints for trouble solving</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="concept.html"
+                        title="previous chapter">General concept</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="getting_started.html"
+                        title="next chapter">Getting started</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/installation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Below we describe how you properly install pyCMBS in your environment.
+Currently, there are three different ways to install pyCMBS</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Easy installation using <em>pip</em> (recommended)</li>
+<li>Source code installation from code repository</li>
+<li>Source code installation from tarball</li>
+</ol>
+</div></blockquote>
+<p>All approaches are detailed below. Special informations for users working
+at the Max-Planck-Institute for Meteorology are provided in a
+<a class="reference internal" href="installation_mpi.html"><em>Detailed installation guide for MPI-M users</em></a></p>
+<div class="section" id="operating-systems">
+<h2>Operating systems<a class="headerlink" href="#operating-systems" title="Permalink to this headline">¶</a></h2>
+<p>pyCMBS is developed purely in python and is expected to be in general independent from a special operating system.
+The current version was however only developed on Linux and no tests at all were made on other operating systems.</p>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>pyCMBS was built to have only a small number of external dependencies.
+However, there is a minimum number of dependencies existing which are a
+required for using pyCMBS sucessfully.</p>
+<p><em>Core python packages [obligatory]</em></p>
+<ul class="simple">
+<li>python 2.7.x</li>
+<li><a class="reference external" href="http://matplotlib.org/">matplotlib v1.3.x</a></li>
+<li><a class="reference external" href="http://www.numpy.org/">numpy</a></li>
+<li><a class="reference external" href="http://www.scipy.org/">scipy</a></li>
+</ul>
+<p>Note that you should really ensure that your matplotlib installation is greater than version 1.3, as otherwise some features will not work. Standard packages like e.g. shipped as standard with Ubuntu have smaller version numbers (e.g. v1.1.1).</p>
+<p><em>Obligatory additional dependencies</em></p>
+<p>For file I/O of netCDF files, a single library is supported at the moment:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://code.google.com/p/netcdf4-python/">netCDF4 library</a> is used as default for file I/O [recommended]</li>
+</ul>
+<p>For an efficient data pre-processing the climate data operators are used. The core CDO&#8217;s and the corresponding python wrapper is required.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://code.zmaw.de/projects/cdo">climate data operators (cdo)</a> [obligatory]</li>
+<li><a class="reference external" href="https://code.zmaw.de/projects/cdo/wiki/Cdo%7Brbpy%7D">cdo python interface</a> [obligatory, can be easily installed using pip]</li>
+</ul>
+<p><em>Recommended dependencies</em></p>
+<p>For plotting projected data (map plots), pyCMBS currently supports two different plotting backends. These are</p>
+<ul class="simple">
+<li><a class="reference external" href="http://scitools.org.uk/cartopy/">cartopy</a> [recommended]</li>
+<li><a class="reference external" href="http://matplotlib.org/basemap/index.html">matplotlib basemap</a> [optional]</li>
+</ul>
+</div>
+<div class="section" id="installation-of-dependencies">
+<h2>Installation of dependencies<a class="headerlink" href="#installation-of-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>For convenience, we have put together an installation procedure to install all required dependencies (except the ones needed for cartopy).
+Please find it <a class="reference internal" href="#installation-dependencies">here</a> for your convenience.</p>
+</div>
+<div class="section" id="quick-installation-from-scratch-for-experts">
+<h2>Quick installation from scratch for experts<a class="headerlink" href="#quick-installation-from-scratch-for-experts" title="Permalink to this headline">¶</a></h2>
+<p>If you have not yet any of the above dependencies installed and are
+working on a Debian like operating system (e.g. Ubunutu), the easiest way to
+install pyCMBS is by executing the installation sequence which can be found in
+the file <em>.travis.yml</em> in the root directory of the source code.</p>
+<p>The developers are using automatic code checking and builds and the
+installation sequence in the file <em>.travis.yml</em> is used to setup for each build
+a working installation.</p>
+</div>
+<div class="section" id="detailed-installation-instructions-for-pycmbs">
+<h2>Detailed installation instructions for pyCMBS<a class="headerlink" href="#detailed-installation-instructions-for-pycmbs" title="Permalink to this headline">¶</a></h2>
+<p>In the following, we will summarize the different approaches to install pyCMBS.</p>
+<div class="section" id="installation-using-pip-the-easiest-way">
+<h3>Installation using <em>pip</em> (the easiest way)<a class="headerlink" href="#installation-using-pip-the-easiest-way" title="Permalink to this headline">¶</a></h3>
+<p>Using <a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a> is the easiest (and recommended) way to install pyCMBS.
+The installation with <em>pip</em> was tested without the cartopy plotting backend so far.</p>
+<p>If you have <em>pip</em> not yet installed on your machine, then the first step
+is to <a class="reference external" href="https://pypi.python.org/pypi/pip">install pip</a> .</p>
+<p>Once <em>pip</em> is installed, the installation of pyCMBS is as simple as a two-liner:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install numpy
+pip install pycmbs
+</pre></div>
+</div>
+<p>Note that the <em>numpy</em> module needs to be installed separately before as otherwise the installation fails. The command <em>pip install pycmbs</em> will then install all remaining dependencies.</p>
+<p>Check if everything is working, like described <a class="reference internal" href="#below">below</a>.</p>
+</div>
+<div class="section" id="installation-of-stable-version-from-a-tarball">
+<h3>Installation of stable version from a <em>tarball</em><a class="headerlink" href="#installation-of-stable-version-from-a-tarball" title="Permalink to this headline">¶</a></h3>
+<p>You can install specific version of pycmbs from a <em>tarball</em> from the <a class="reference external" href="https://github.com/pygeo/pycmbs/releases">download site</a> . All dependencies must have been installed before.</p>
+<p>After you have obtained the pyCMBS code from a <em>tarball</em>, then first extract the archive into some new directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>mkdir temp_dir
+cd temp_dir
+tar -xvf pycmbs-vx.x.x.tar.gz
+</pre></div>
+</div>
+<p>This expands the tar file and you obtain a subdirectory,  called <em>pycmbs-vx.x.x</em></p>
+<p>To install the package first change to the directory and then install
+the package using the standard python setup tools as:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd pycmbs-vx.x.x
+python setup.py install
+</pre></div>
+</div>
+<p>This will install the package in your python environment.
+Check successful installation, like described <a class="reference internal" href="#below">below</a>.</p>
+</div>
+<div class="section" id="github-repository-for-developers">
+<h3>github repository (for developers)<a class="headerlink" href="#github-repository-for-developers" title="Permalink to this headline">¶</a></h3>
+<p>Another alternative to work with pyCMBS is to used the master branch of
+the <a class="reference external" href="https://github.com/pygeo/pycmbs">code repository</a>. The code is hosted on a github repository. All
+dependencies  must have been installed before.</p>
+<p>To retrieve the code do the following:</p>
+<div class="highlight-python"><div class="highlight"><pre># generate some directory
+mkdir pycmbs
+cd pycmbs
+
+# retrieve the code
+git clone
+
+# do installation
+python setup.py install
+
+# or as an alternative for developers, just set the PYTHONPATH
+# environment variable to the pycmbs root directory and also adapt
+# you systempath (PATH) such that includes the pycmbs rootdirectory
+</pre></div>
+</div>
+<p>Check successful installation, like described <a class="reference internal" href="#below">below</a>.</p>
+</div>
+</div>
+<div class="section" id="installation-dependencies">
+<span id="id2"></span><h2>Installation of dependencies<a class="headerlink" href="#installation-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Please find here a working installation procedure, which was tested under Ubuntu 32-bit. It installs all pyCMBS dependencies, except the ones needed for cartopy and installs pyCMBS itself.:</p>
+<div class="highlight-python"><div class="highlight"><pre>#!/usr/bin/env bash
+
+#
+# This file provides an installing procedure for pyCMBS WITHOUT Cartopy support
+#    it was tested for ubuntu32
+#
+
+# update package database
+apt-get update
+
+#####################################################################
+# DEPENDENCIES
+#####################################################################
+
+# the -qq option installs silent using defaults
+apt-get -qq install texlive-latex-base texlive-latex-extra texlive-latex-recommended
+apt-get -qq install python-pip python-dev
+apt-get -qq install cdo libhdf5-openmpi-dev libnetcdf-dev libopenmpi-dev
+apt-get -qq install python-numpy
+apt-get -qq install cython
+C_INCLUDE_PATH=/usr/include/mpi pip install netCDF4
+
+# apt-get -qq install python-matplotlib  # this gives the system default package, which is currently v1.1.1 therefore it is not used here
+# it is highly recommended to use matplotlib &gt; 1.3
+apt-get -qq install libfreetype6-dev libpng-dev  # required for matplotlib
+sudo easy_install -U distribute
+sudo pip install https://downloads.sourceforge.net/project/matplotlib/matplotlib/matplotlib-1.3.1/matplotlib-1.3.1.tar.gz
+apt-get -qq install python-mpltoolkits.basemap
+apt-get -qq install python-mpltoolkits.basemap-data
+
+apt-get -qq install python-scipy
+
+#####################################################################
+# pycmbs
+#####################################################################
+pip install --upgrade pycmbs
+
+#####################################################################
+# test environment
+#####################################################################
+pip install nose
+
+echo &quot;Now you can run the unittests as follows:&quot;
+echo &quot;    cd /usr/local/lib/python2.7/dist-packages/pycmbs/tests&quot;
+echo &quot;    nosetests&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-check-of-installation">
+<span id="below"></span><h2>Final check of installation<a class="headerlink" href="#final-check-of-installation" title="Permalink to this headline">¶</a></h2>
+<p>Check that installation worked properly by going through the following
+checklist. In case of problems, please refer to the <a class="reference internal" href="#troublesolver">troublesolver</a> .</p>
+<p><em>Is the pyCMBS python module loaded properly?</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>python -c &quot;from pycmbs import *; print(&#39;Welcome to pyCMBS&#39;)&quot;
+</pre></div>
+</div>
+<p>This should give you a short welcome message, but no error messages.</p>
+<p><em>Is the benchmarking script working properly?</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pycmbs</span><span class="o">-</span><span class="n">benchmarking</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>This will you give a short message like:</p>
+<div class="highlight-python"><div class="highlight"><pre>*******************************************
+* WELCOME to pycmbs.py                    *
+* Happy benchmarking ...                  *
+*******************************************
+</pre></div>
+</div>
+<p>and will end with an error message that the configuration file is
+not found (this is o.k.)</p>
+<p><strong>If you see the above, the installation has worked! Congratulations!</strong></p>
+<p>3. Check also the proper installation of the cdo&#8217;s and the cdo.py
+interface, as this is a prerequesite of beeing able to properly work
+with pyCMBS:</p>
+<div class="highlight-python"><div class="highlight"><pre>python -c &quot;from cdo import *; cdo=Cdo(); print &#39;If you see this, everything went right ... have fun with pyCMBS and CDOs&#39;&quot;
+</pre></div>
+</div>
+<p>Again, this should give you a short welcome message. Any error message
+is a bad sign. In that case, please check your installation again.
+Have a look at the <a class="reference internal" href="#troublesolver">troublesolver</a>.</p>
+<p>pycmbs init</p>
+</div>
+<div class="section" id="further-information-and-trouble-solving">
+<span id="installation-details"></span><h2>Further information and trouble solving<a class="headerlink" href="#further-information-and-trouble-solving" title="Permalink to this headline">¶</a></h2>
+<p>pyCMBS makes use of a standard directory to look for observations. This
+directory is the Standard Evaluation Pool (SEP). The path to the SEP directory
+needs to be specified in the $SEP environment variable. In you .bashrc write:</p>
+<div class="highlight-python"><div class="highlight"><pre>export SEP=/path/to/directory
+</pre></div>
+</div>
+<p>For users at MPI-M, the SEP variable needs to point to <em>/pool/SEP</em>. It is
+however possible to specify also for each observation an individual path where
+the observation is located. Then the SEP evnironment variable is not required.
+To check whether SEP is set, type:</p>
+<div class="highlight-python"><div class="highlight"><pre>echo $SEP
+</pre></div>
+</div>
+<div class="section" id="some-hints-for-trouble-solving">
+<span id="troublesolver"></span><h3>Some hints for trouble solving<a class="headerlink" href="#some-hints-for-trouble-solving" title="Permalink to this headline">¶</a></h3>
+<p>If your pyCMBS installation seems not to work properly, here are a few
+recommendations where to start searching.</p>
+<p><em>Is python working properly?</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>python -c &quot;print &#39;Hello world&#39;&quot;
+</pre></div>
+</div>
+<p><em>Does your PYTHONPATH environment variable contain the path to pyCMBS?</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>echo $PYTHONPATH
+</pre></div>
+</div>
+<p>This should give you the path where python is searching for modules.
+If it is empty you are most likely in trouble. Check if you have a
+valid python installation.</p>
+<p><em>Is the script pycmb-benchmarking.py found in the system path?</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pycmbs</span><span class="o">-</span><span class="n">benchmarking</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>should give you a short Welcome Screen like described above. If this is not the
+case then either the overall pyCMBS installation is incomplete or Your
+systempath is not set appropriately. Type:</p>
+<div class="highlight-python"><div class="highlight"><pre>echo $PATH
+</pre></div>
+</div>
+<p>and verify if the directory where pycmbs-benchmarking.py is located is listed
+in your PATH variable. If not, then you can try to change your PATH variable to
+make it working.</p>
+<p><em>Further problems?</em></p>
+<p>In case that these recommendations did not solve your problem, please
+feel free to ask a question or raise an issue on the pyCMBS <a class="reference external" href="https://github.com/pygeo/pycmbs">development site</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting started"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="concept.html" title="General concept"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

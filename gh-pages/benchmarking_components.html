@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Benchmarking components &mdash; pyCMBS 1.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyCMBS 1.0.0-dev documentation" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo50.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Benchmarking components</a><ul>
+<li><a class="reference internal" href="#map-season">Map season</a></li>
+<li><a class="reference internal" href="#map-difference">Map difference</a></li>
+<li><a class="reference internal" href="#hovmoeller-plot">Hovmoeller plot</a></li>
+<li><a class="reference internal" href="#pattern-correlation">Pattern correlation</a></li>
+<li><a class="reference internal" href="#portraet-diagram">Portraet diagram</a></li>
+<li><a class="reference internal" href="#global-mean-plot">Global Mean Plot</a></li>
+<li><a class="reference internal" href="#coming-next">Coming next</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/benchmarking_components.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="benchmarking-components">
+<h1>Benchmarking components<a class="headerlink" href="#benchmarking-components" title="Permalink to this headline">¶</a></h1>
+<p>The benchmarking part of pyCMBS is based on a modular system of diagnostics.
+Currently the focus is on the comparison of climate mean states between
+observations and models. Below are examples of the currently implemented
+components which the user can combine to generate a specific report for a
+certain variable.</p>
+<div class="section" id="map-season">
+<h2>Map season<a class="headerlink" href="#map-season" title="Permalink to this headline">¶</a></h2>
+<p>Creates a figure with seasonal or monthly climatological means of the
+investigated variables.</p>
+<p>(<a class="reference external" href="./figures/fig_map_season.py">Source code</a>)</p>
+</div>
+<div class="section" id="map-difference">
+<h2>Map difference<a class="headerlink" href="#map-difference" title="Permalink to this headline">¶</a></h2>
+<p>Create a plot of temporal mean fields of observations and models and their
+absolute and relative differences.</p>
+<p>(<a class="reference external" href="./figures/fig_map_difference.py">Source code</a>)</p>
+</div>
+<div class="section" id="hovmoeller-plot">
+<h2>Hovmoeller plot<a class="headerlink" href="#hovmoeller-plot" title="Permalink to this headline">¶</a></h2>
+<p>Generates a standard Hovmoeller plot (= time-latitude plot) of the variable.</p>
+<p>(<a class="reference external" href="./figures/fig_hovmoeller.py">Source code</a>)</p>
+</div>
+<div class="section" id="pattern-correlation">
+<h2>Pattern correlation<a class="headerlink" href="#pattern-correlation" title="Permalink to this headline">¶</a></h2>
+<p>The correlation between the spatial patterns of investigated variables between
+models and observations can be vizualized in differnt ways. For each month or
+season the spatial correlation coefficient is estimated and vizualized as a
+timeline.</p>
+<p>(<a class="reference external" href="./figures/fig_pattern_correlation.py">Source code</a>)</p>
+</div>
+<div class="section" id="portraet-diagram">
+<h2>Portraet diagram<a class="headerlink" href="#portraet-diagram" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Portraet diagram</em> was proposed by <a class="reference external" href="http://www.agu.org/pubs/crossref/2008/2007JD008972.shtml">Gleckler et al. (2008)</a>. It is an
+efficient way to vizualize the relative rank of different models  for
+comparisons against different observations. While the original Portraet diagram
+supports only two different observations, pyCMBS supports up to four different
+datasets for each variable.</p>
+<p>(<a class="reference external" href="./figures/fig_portraet.py">Source code</a>, <a class="reference external" href="./figures/fig_portraet.png">png</a>, <a class="reference external" href="./figures/fig_portraet.hires.png">hires.png</a>, <a class="reference external" href="./figures/fig_portraet.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/fig_portraet.png" src="_images/fig_portraet.png" />
+</div>
+</div>
+<div class="section" id="global-mean-plot">
+<h2>Global Mean Plot<a class="headerlink" href="#global-mean-plot" title="Permalink to this headline">¶</a></h2>
+<p>Global mean timeseries of a specific variable. The global mean values are
+estimated using proper area weighting. The plot object also allows to
+automatically plot climatology mean values.</p>
+<p>(<a class="reference external" href="./figures/fig_globalmean.py">Source code</a>)</p>
+</div>
+<div class="section" id="coming-next">
+<h2>Coming next<a class="headerlink" href="#coming-next" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Regional analysis</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2014, Alexander Loew.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
